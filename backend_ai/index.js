@@ -9,10 +9,12 @@ require("./conn");
 
 app.use(express.json());
 
+// Set origin to 'true' to dynamically accept the frontend URL 
+// This eliminates any trailing slash or typo issues in Vercel Variables
 app.use(
   cors({
     credentials: true,
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin: true,
   })
 );
 
