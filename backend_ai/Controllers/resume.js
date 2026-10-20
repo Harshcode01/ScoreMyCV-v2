@@ -1,20 +1,9 @@
-const ResumeModel = require("../Models/resume");
-const multer = require("multer");
-const pdfParse = require("pdf-parse");
-const path = require("path");
-const fs = require("fs");
-const { CohereClient } = require("cohere-ai");
-
-const cohere = new CohereClient({
-  token: process.env.COHERE_API_KEY,
-});
-
 exports.addResume = async (req, res) => {
   try {
     const { job_desc, user } = req.body;
-    const pdfPath = req.file.path;
-
-    const dataBuffer = fs.readFileSync(pdfPath);
+    
+    // Read the PDF directly from the memory buffer (No fs module needed)
+    const dataBuffer = req.file.buffer;
     const pdfData = await pdfParse(dataBuffer);
 
     const prompt = `Evaluate the resume against the job description.
@@ -46,11 +35,11 @@ Reason: ...`;
 
     let result = response.text;
 
-    // Score
+    // Score extraction
     const match = result.match(/Score:\s*(\d+)/);
     const score = match ? parseInt(match[1], 10) : null;
 
-    // Feedback
+    // Feedback extraction
     const reasonMatch = result.match(/Reason:\s*([\s\S]*)/);
     const reason = reasonMatch ? reasonMatch[1].trim() : null;
 
@@ -63,30 +52,10 @@ Reason: ...`;
     });
 
     await newResume.save();
-    fs.unlinkSync(pdfPath);
+    
+    // fs.unlinkSync(pdfPath) is REMOVED because no physical file was created
 
     res.status(200).json({ message: "your analysis are ready", data: newResume });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: "server error", message: err.message });
-  }
-};
-
-exports.getAllResumesForUser = async (req, res) => {
-  try {
-    const { user } = req.params;
-    let resumes = await ResumeModel.find({ user: user }).sort({ createdAt: -1 });
-    return res.status(200).json({ message: "Your previous history", resumes: resumes });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: "server error", message: err.message });
-  }
-};
-
-exports.getAllResumesForAdmin = async (req, res) => {
-  try {
-    let resumes = await ResumeModel.find({}).sort({ createdAt: -1 }).populate("user");
-    return res.status(200).json({ message: "fetch all History", resumes: resumes });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "server error", message: err.message });
