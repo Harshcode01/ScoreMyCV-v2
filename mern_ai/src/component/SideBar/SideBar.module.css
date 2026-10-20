@@ -1,0 +1,325 @@
+/* Desktop Spatial Floating Glass Dock (>= 900px) */
+.dockContainer {
+  position: fixed;
+  top: 20px;
+  bottom: 20px;
+  left: 20px;
+  width: 256px;
+  border-radius: 24px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hairline);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 16px;
+  z-index: 90;
+  transition: transform 0.3s var(--ease-spring), border-color 0.3s ease;
+}
+
+.dockContainer:hover {
+  border-color: var(--border-specular);
+}
+
+/* Header & Brand Emblem */
+.brandWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.telemetryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--text-mono);
+}
+
+.telemetryTag {
+  color: var(--accent-cyan);
+}
+
+.brandGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandEmblem {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(6, 182, 212, 0.25));
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 18px rgba(6, 182, 212, 0.25);
+  flex-shrink: 0;
+}
+
+.brandTextGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandTitle {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.brandSubpill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--accent-indigo);
+  letter-spacing: 0.08em;
+  margin-top: 3px;
+}
+
+/* Navigation Group */
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+  flex: 1;
+}
+
+.navSectionLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--text-mono);
+  padding: 0 12px 6px;
+  text-transform: uppercase;
+}
+
+.navLink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  z-index: 1;
+}
+
+.navLink:hover {
+  color: var(--text-primary);
+}
+
+.navLinkActive {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.activeNavPill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.15));
+  border: 1px solid rgba(6, 182, 212, 0.45);
+  box-shadow: 
+    0 0 20px rgba(6, 182, 212, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  z-index: -1;
+}
+
+.navNum {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  opacity: 0.5;
+}
+
+/* Dock User Footer */
+.userFooter {
+  padding-top: 16px;
+  border-top: 1px solid var(--border-hairline);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.userCard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.userAvatarWrapper {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.userAvatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(6, 182, 212, 0.4);
+}
+
+.userAvatarFallback {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan));
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+}
+
+.pulsingOnlineDot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 9px;
+  height: 9px;
+  background-color: var(--status-emerald);
+  border: 2px solid var(--bg-void);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--status-emerald);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex: 1;
+}
+
+.userName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userEmail {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-mono);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.signOutBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  background: rgba(244, 63, 94, 0.08);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  color: #fca5a5;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+}
+
+.signOutBtn:hover {
+  background: rgba(244, 63, 94, 0.18);
+  border-color: rgba(244, 63, 94, 0.4);
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(244, 63, 94, 0.2);
+}
+
+/* Mobile Responsive Spatial Bottom Bar (< 900px) */
+@media screen and (max-width: 899px) {
+  .dockContainer {
+    top: auto;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: auto;
+    height: 68px;
+    border-radius: 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 8px 14px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+  }
+
+  .brandWrapper,
+  .navSectionLabel,
+  .userCard,
+  .navNum {
+    display: none;
+  }
+
+  .navGroup {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 0;
+    flex: 1;
+  }
+
+  .navLink {
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .userFooter {
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0;
+    border-top: none;
+    gap: 8px;
+  }
+
+  .signOutBtn {
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+
+  .signOutBtn span {
+    display: none;
+  }
+}

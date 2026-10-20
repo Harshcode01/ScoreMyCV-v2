@@ -1,0 +1,796 @@
+.dashboardPage {
+  width: 100%;
+  min-height: 100vh;
+  padding: 32px 36px 60px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Top Workspace Header */
+.workspaceHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-hairline);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.userGreetingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.greetingSub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+}
+
+.greetingTitle {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.systemStatusPills {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.statusPill {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  background: rgba(20, 26, 42, 0.6);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statusPillActive {
+  color: var(--accent-cyan);
+  border-color: rgba(6, 182, 212, 0.35);
+  background: rgba(6, 182, 212, 0.08);
+}
+
+.dotPulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--status-emerald);
+  box-shadow: 0 0 8px var(--status-emerald);
+  animation: pulseGlow 2s infinite;
+}
+
+/* Two-Column Main Workspace Grid */
+.workspaceGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Left Column Container */
+.leftColCard {
+  padding: 24px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Holographic PDF Dropzone */
+.dropzoneContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dropzoneLabelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+}
+
+.dropzoneChamber {
+  position: relative;
+  border: 1.5px dashed rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  background: rgba(9, 13, 22, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.dropzoneChamberDragging {
+  border-color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.08);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+}
+
+.dropzoneChamber:hover {
+  border-color: rgba(6, 182, 212, 0.5);
+  background: rgba(14, 20, 34, 0.8);
+}
+
+/* Swiss reticle corners */
+.reticleCorner {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--accent-cyan);
+  opacity: 0.6;
+  pointer-events: none;
+  user-select: none;
+}
+
+.cornerTL {
+  top: 8px;
+  left: 10px;
+}
+.cornerTR {
+  top: 8px;
+  right: 10px;
+}
+.cornerBL {
+  bottom: 8px;
+  left: 10px;
+}
+.cornerBR {
+  bottom: 8px;
+  right: 10px;
+}
+
+.dropzoneIconWrapper {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.2));
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
+  margin-bottom: 12px;
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+}
+
+.dropzoneTitle {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.dropzoneMeta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-mono);
+}
+
+/* 3D Locked Document Cartridge (Selected State) */
+.lockedCartridge {
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 16px;
+  background: rgba(10, 24, 20, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
+}
+
+.cartridgeLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.cartridgeIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--status-emerald);
+  flex-shrink: 0;
+}
+
+.cartridgeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cartridgeFilename {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cartridgeMetaRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cartridgeSize {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.lockedBadge {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--status-emerald);
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid var(--status-emerald);
+  padding: 2px 7px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.replacePdfBtn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-hairline);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px 14px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.replacePdfBtn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.1);
+}
+
+/* Job Description Command Editor */
+.editorSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.editorHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.editorLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--accent-cyan);
+}
+
+.counterBadge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-mono);
+}
+
+.presetPillRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.presetPill {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.presetPill:hover {
+  background: rgba(6, 182, 212, 0.12);
+  border-color: rgba(6, 182, 212, 0.4);
+  color: var(--accent-cyan);
+}
+
+.presetClear {
+  color: var(--status-rose);
+}
+
+.presetClear:hover {
+  background: rgba(244, 63, 94, 0.12);
+  border-color: rgba(244, 63, 94, 0.4);
+  color: #fca5a5;
+}
+
+.jobTextarea {
+  width: 100%;
+  min-height: 180px;
+  background: rgba(6, 9, 16, 0.7);
+  border: 1px solid var(--border-hairline);
+  border-radius: 14px;
+  padding: 16px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.jobTextarea:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.25);
+}
+
+/* 3D Gradient Shimmer Analyze Button */
+.analyzeBtn {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 24px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #6366F1 0%, #06B6D4 100%);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 
+    0 10px 30px rgba(99, 102, 241, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.analyzeBtn:hover:not(:disabled) {
+  transform: translateY(-1.5px);
+  box-shadow: 
+    0 15px 35px rgba(6, 182, 212, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.analyzeBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btnShimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  animation: shimmerSweep 3s infinite;
+}
+
+@keyframes shimmerSweep {
+  0% {
+    left: -100%;
+  }
+  40%, 100% {
+    left: 140%;
+  }
+}
+
+/* Right Column Containers */
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 1. Idle State: Pipeline Card */
+.idleContainer {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.idleHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-mono);
+}
+
+.pipelineGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.pipelineStep {
+  background: rgba(14, 20, 34, 0.6);
+  border: 1px solid var(--border-hairline);
+  border-radius: 12px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pipelineNum {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+
+.pipelineTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.35;
+}
+
+/* 2. Scanning State: Volumetric Laser & Terminal */
+.scanningCard {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.volumetricLaserContainer {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 180px;
+  border-radius: 14px;
+  background: rgba(6, 12, 22, 0.8);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wireframeDocumentSvg {
+  opacity: 0.35;
+}
+
+.laserBeam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #06B6D4;
+  box-shadow: 0 0 28px #06B6D4, 0 0 10px #06B6D4;
+  animation: laserSweep 2s ease-in-out infinite;
+}
+
+.terminalContainer {
+  width: 100%;
+  background: rgba(4, 7, 12, 0.85);
+  border: 1px solid var(--border-hairline);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.terminalLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-mono);
+}
+
+.terminalLineActive {
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+.terminalCursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  background: var(--accent-cyan);
+  margin-left: 4px;
+  animation: pulseGlow 1s infinite;
+}
+
+/* 3. Completed State: Score Dial & Insights */
+.completedTopCard {
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.scoreMetaCol {
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scoreMetaHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scoreMetaHeading {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.scoreMetaText {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.scoreMetaTags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.metaTagPill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-secondary);
+}
+
+/* Actions Header Bar */
+.resultsActionBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 10px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.copyReportBtn {
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  color: var(--accent-cyan);
+}
+
+.copyReportBtn:hover {
+  background: rgba(6, 182, 212, 0.22);
+  color: #ffffff;
+}
+
+.newScanBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-secondary);
+}
+
+.newScanBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+/* Glass Insight Cards */
+.insightsBentoCard {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.insightsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--accent-cyan);
+}
+
+.insightsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.insightCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(14, 20, 32, 0.55);
+  border: 1px solid var(--border-hairline);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.2s ease;
+}
+
+.insightCard:hover {
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+.insightBadge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  padding: 2px 7px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.insightText {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 1120px) {
+  .workspaceGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dashboardPage {
+    padding: 20px 16px 96px;
+  }
+
+  .pipelineGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .completedTopCard {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .scoreMetaCol {
+    min-width: 100%;
+  }
+
+  .scoreMetaHeader {
+    justify-content: center;
+  }
+
+  .scoreMetaTags {
+    justify-content: center;
+  }
+
+  .jobTextarea {
+    min-height: 140px;
+  }
+
+  .workspaceHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dashboardPage {
+    padding: 16px 12px 96px;
+  }
+
+  .greetingTitle {
+    font-size: 22px;
+  }
+
+  .analyzeBtn {
+    font-size: 13px;
+    padding: 14px 18px;
+  }
+
+  .resultsActionBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actionBtn {
+    justify-content: center;
+  }
+}

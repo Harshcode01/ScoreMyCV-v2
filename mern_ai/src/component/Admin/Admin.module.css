@@ -1,0 +1,124 @@
+.adminContainer {
+  flex: 1;
+  min-height: 100vh;
+  padding: 36px 40px 60px 40px;
+  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  box-sizing: border-box;
+}
+
+.telemetryTopRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #818CF8;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.adminHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.adminTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.adminHeading {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+}
+
+.adminGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.adminCard {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.userRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background: var(--accent-gradient);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.userName {
+  font-size: 15px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.userEmail {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #818CF8;
+}
+
+.feedbackBox {
+  background: rgba(9, 13, 22, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-height: 140px;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 900px) {
+  .adminContainer {
+    padding: 24px 20px 60px 20px;
+  }
+
+  .adminGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .adminContainer {
+    padding: 20px 16px 40px 16px;
+  }
+
+  .adminHeading {
+    font-size: 24px;
+  }
+
+  .adminTitleRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
